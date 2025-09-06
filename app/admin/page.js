@@ -105,7 +105,7 @@ export default function AdminDashboardPage() {
 
   useEffect(() => {
     fetchAnalytics();
-    setupNotifications();
+    // setupNotifications();
   }, []);
 
   const fetchAnalytics = async () => {
@@ -170,7 +170,7 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-rose-50 p-6">
-      <audio ref={audioRef} src="/notification.mp3" />
+      {/* <audio ref={audioRef} src="/notification.mp3" /> */}
       
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
@@ -180,10 +180,10 @@ export default function AdminDashboardPage() {
           </h1>
           <p className="text-gray-600 mt-2">Welcome back! Here's what's happening with your store.</p>
         </div>
-        <NotificationBell 
+        {/* <NotificationBell 
           notifications={notifications} 
           onToggle={() => setShowNotifications(!showNotifications)} 
-        />
+        /> */}
       </div>
 
       {/* Notifications Panel */}
