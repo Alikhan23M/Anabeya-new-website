@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import authOptions from "@/app/api/auth/[...nextauth]/authOptions";
 import connectDB from "@/lib/mongodb";
 import Order from "@/lib/models/Order";
 import User from "@/lib/models/User";

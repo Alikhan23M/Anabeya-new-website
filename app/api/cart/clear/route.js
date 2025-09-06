@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // ✅ same authOptions as other routes
+import authOptions from "@/app/api/auth/[...nextauth]/authOptions"; // ✅ same authOptions as other routes
 import connectDB from "@/lib/mongodb";
 import User from "@/lib/models/User";
 

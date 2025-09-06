@@ -5,7 +5,7 @@ import Providers from "./provider.js";
 import Navbar from "@/components/Navbar";
 import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
-
+import LayoutComponent from "@/components/LayoutComponent";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -15,16 +15,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <div className="min-h-screen flex flex-col">
-            <Navbar />
-            <main className="flex-1 pb-16 md:pb-0">{children}</main>
-            <Footer />
-            <BottomNav />
-          </div>
+          <LayoutComponent>{children}</LayoutComponent>
         </Providers>
       </body>
     </html>
