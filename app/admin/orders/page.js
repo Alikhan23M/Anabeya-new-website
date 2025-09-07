@@ -58,13 +58,14 @@ function ProductImage({ product, className = "w-10 h-10" }) {
       />
     );
   }
-  
+
   return (
     <div className={`${className} bg-neutral-100 rounded-lg flex items-center justify-center border border-neutral-200`}>
       <PhotoIcon className="w-5 h-5 text-neutral-400" />
     </div>
   );
 }
+
 
 function OrderRow({ order, onUpdateStatus }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -74,16 +75,16 @@ function OrderRow({ order, onUpdateStatus }) {
     setUpdating(true);
     try {
       const response = await fetch(`/api/admin/orders/${order._id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
       });
-      
+
       if (response.ok) {
         onUpdateStatus(order._id, newStatus);
       }
     } catch (error) {
-      console.error('Error updating order status:', error);
+      console.error("Error updating order status:", error);
     } finally {
       setUpdating(false);
     }
@@ -107,12 +108,12 @@ function OrderRow({ order, onUpdateStatus }) {
                 Order #{order.orderNumber}
               </h3>
               <p className="text-sm text-neutral-500">
-                {new Date(order.createdAt).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
+                {new Date(order.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
                 })}
               </p>
             </div>
@@ -126,98 +127,124 @@ function OrderRow({ order, onUpdateStatus }) {
         </div>
       </div>
 
-      {/* Order Details */}
-      <div className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div>
-            <h4 className="font-semibold text-neutral-900 mb-2">Customer Information</h4>
-            <div className="text-sm text-neutral-600">
-              <p className="font-medium">{order.customerInfo?.name}</p>
-              <p>{order.user?.email}</p>
-              <p>{order.customerInfo?.phone}</p>
-            </div>
-          </div>
-          <div>
-            <h4 className="font-semibold text-neutral-900 mb-2">Shipping Address</h4>
-            <div className="text-sm text-neutral-600">
-              <p>{order.customerInfo?.address?.street}</p>
-              <p>
-                {order.customerInfo?.address?.city}, {order.customerInfo?.address?.state} {order.customerInfo?.address?.zipCode}
-              </p>
-              <p>{order.customerInfo?.address?.country}</p>
-            </div>
-          </div>
-          <div>
-            <h4 className="font-semibold text-neutral-900 mb-2">Order Summary</h4>
-            <div className="text-sm text-neutral-600">
-              <p>{order.items.length} items</p>
-              <p>Total: ${order.totalAmount}</p>
-              {order.customerInfo?.sizeDescription && (
-                <p className="mt-2 text-xs bg-neutral-50 p-2 rounded">
-                  Size Note: {order.customerInfo.sizeDescription}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Order Items */}
-        <div className="mb-6">
-          <h4 className="font-semibold text-neutral-900 mb-3">Order Items</h4>
-          <div className="space-y-3">
-            {order.items.map((item, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-neutral-50 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <ProductImage product={item.product} />
-                  <div>
-                    <p className="font-medium text-neutral-900">{item.product?.title}</p>
-                    <p className="text-sm text-neutral-500">
-                      Size: {item.size} • Qty: {item.quantity}
-                    </p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className="font-semibold text-neutral-900">${item.price}</p>
-                  <p className="text-sm text-neutral-500">Total: ${(item.price * item.quantity).toFixed(2)}</p>
+      {/* Expandable Order Details */}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="p-4 md:p-6 overflow-hidden"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div>
+                <h4 className="font-semibold text-neutral-900 mb-2">
+                  Customer Information
+                </h4>
+                <div className="text-sm text-neutral-600">
+                  <p className="font-medium">{order.customerInfo?.name}</p>
+                  <p>{order.user?.email}</p>
+                  <p>{order.customerInfo?.phone}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+              <div>
+                <h4 className="font-semibold text-neutral-900 mb-2">
+                  Shipping Address
+                </h4>
+                <div className="text-sm text-neutral-600">
+                  <p>{order.customerInfo?.address?.street}</p>
+                  <p>
+                    {order.customerInfo?.address?.city},{" "}
+                    {order.customerInfo?.address?.state}{" "}
+                    {order.customerInfo?.address?.zipCode}
+                  </p>
+                  <p>{order.customerInfo?.address?.country}</p>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-semibold text-neutral-900 mb-2">
+                  Order Summary
+                </h4>
+                <div className="text-sm text-neutral-600">
+                  <p>{order.items.length} items</p>
+                  <p>Total: ${order.totalAmount}</p>
+                  {order.customerInfo?.sizeDescription && (
+                    <p className="mt-2 text-xs bg-neutral-50 p-2 rounded">
+                      Size Note: {order.customerInfo.sizeDescription}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-6 border-t border-neutral-100">
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center text-primary-600 hover:text-primary-700 font-medium"
+            {/* Order Items */}
+            <div className="mb-6">
+              <h4 className="font-semibold text-neutral-900 mb-3">
+                Order Items
+              </h4>
+              <div className="space-y-3">
+                {order.items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 bg-neutral-50 rounded-lg"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <ProductImage product={item.product} />
+                      <div>
+                        <p className="font-medium text-neutral-900">
+                          {item.product?.title}
+                        </p>
+                        <p className="text-sm text-neutral-500">
+                          Size: {item.size} • Qty: {item.quantity}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-neutral-900">
+                        ${item.price}
+                      </p>
+                      <p className="text-sm text-neutral-500">
+                        Total: ${(item.price * item.quantity).toFixed(2)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Action Buttons (always visible) */}
+      <div className="flex items-center justify-between p-4 md:p-6 border-t border-neutral-100">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center text-primary-600 hover:text-primary-700 font-medium"
+        >
+          <EyeIcon className="w-4 h-4 mr-1" />
+          {isExpanded ? "Hide Details" : "View Details"}
+        </button>
+
+        <div className="flex items-center space-x-2">
+          <select
+            value={order.status}
+            onChange={(e) => handleStatusUpdate(e.target.value)}
+            disabled={updating}
+            className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
           >
-            <EyeIcon className="w-4 h-4 mr-1" />
-            {isExpanded ? 'Hide Details' : 'View Details'}
-          </button>
-          
-          <div className="flex items-center space-x-2">
-            <select
-              value={order.status}
-              onChange={(e) => handleStatusUpdate(e.target.value)}
-              disabled={updating}
-              className="px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            >
-              <option value="Pending">Pending</option>
-              <option value="Processing">Processing</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Cancelled">Cancelled</option>
-            </select>
-            {updating && (
-              <div className="spinner w-4 h-4"></div>
-            )}
-          </div>
+            <option value="Pending">Pending</option>
+            <option value="Processing">Processing</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          {updating && <div className="spinner w-4 h-4"></div>}
         </div>
       </div>
     </motion.div>
   );
 }
-
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -244,20 +271,20 @@ export default function AdminOrdersPage() {
   };
 
   const handleUpdateStatus = (orderId, newStatus) => {
-    setOrders(prev => prev.map(order => 
+    setOrders(prev => prev.map(order =>
       order._id === orderId ? { ...order, status: newStatus } : order
     ));
   };
 
   const filteredOrders = orders
     .filter(order => {
-      const matchesSearch = 
+      const matchesSearch =
         order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.customerInfo?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.user?.email?.toLowerCase().includes(searchTerm.toLowerCase());
-      
+
       const matchesStatus = statusFilter === 'all' || order.status === statusFilter;
-      
+
       return matchesSearch && matchesStatus;
     })
     .sort((a, b) => {
@@ -388,8 +415,8 @@ export default function AdminOrdersPage() {
           <div className="text-neutral-400 text-6xl mb-4">📦</div>
           <h3 className="text-xl font-semibold text-neutral-900 mb-2">No Orders Found</h3>
           <p className="text-neutral-600">
-            {searchTerm || statusFilter !== 'all' 
-              ? 'Try adjusting your search or filter criteria' 
+            {searchTerm || statusFilter !== 'all'
+              ? 'Try adjusting your search or filter criteria'
               : 'No orders have been placed yet'
             }
           </p>
