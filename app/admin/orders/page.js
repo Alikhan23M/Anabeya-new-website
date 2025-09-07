@@ -297,7 +297,7 @@ export default function AdminOrdersPage() {
   }
 
   return (
-    <div className="admin-page p-2 md:p-6">
+    <div className="admin-page p-0 md:p-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="admin-header">Orders Management</h1>

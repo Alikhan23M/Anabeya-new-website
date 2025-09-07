@@ -169,7 +169,7 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-rose-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-rose-50 p-2 md:p-6">
       {/* <audio ref={audioRef} src="/notification.mp3" /> */}
       
       {/* Header */}

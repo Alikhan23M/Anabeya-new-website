@@ -316,7 +316,7 @@ export default function AdminCategoriesPage() {
 
   return (
     <div className="admin-page">
-      <div className="max-w-7xl mx-auto p-2 md:p-6">
+      <div className="max-w-7xl mx-auto p-0 md:p-6">
         {/* Header */}
         <div className="mb-8">
           <h1 className="admin-header">Categories Management</h1>
