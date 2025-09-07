@@ -13,6 +13,7 @@ import {
   FaBars,
   FaTimes,
   FaSignOutAlt,
+  FaRegFolderOpen,
 } from "react-icons/fa";
 
 export default function AdminLayout({ children }) {
@@ -42,6 +43,7 @@ export default function AdminLayout({ children }) {
     { href: "/admin/orders", label: "Orders", icon: <FaBoxOpen /> },
     { href: "/admin/products", label: "Products", icon: <FaShoppingCart /> },
     { href: "/admin/categories", label: "Categories", icon: <FaFolderOpen /> },
+    { href: "/admin/message", label: "Messages", icon: <FaRegFolderOpen /> },
     { href: "/admin/settings", label: "Settings", icon: <FaCog /> },
   ];
 
