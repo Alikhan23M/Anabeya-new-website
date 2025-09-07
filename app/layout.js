@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Providers from "./provider.js";
 import LayoutComponent from "@/components/LayoutComponent";
 import InstallPrompt from "../components/InstallPrompt.js";
-import DynamicManifest from "../components/DynamicManifest.js";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -34,8 +34,7 @@ export default function RootLayout({ children }) {
           <InstallPrompt/>
           </LayoutComponent>
         </Providers>
-        {/* Dynamically swap manifest depending on route */}
-        <DynamicManifest />
+      
       </body>
     </html>
   );

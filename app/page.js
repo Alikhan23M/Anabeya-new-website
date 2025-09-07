@@ -13,6 +13,24 @@ export default function HomePage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [showAdminPrompt, setShowAdminPrompt] = useState(false);
+  useEffect(() => {
+    fetchData();
+
+    const isAdmin = localStorage.getItem("admin-auth");
+    const dismissed = sessionStorage.getItem("dismiss-admin-prompt"); // so it shows once per session
+
+    if (isAdmin && !window.location.pathname.startsWith("/admin") && !dismissed) {
+      setShowAdminPrompt(true);
+    }
+  }, []);
+
+   const handleDismiss = () => {
+    setShowAdminPrompt(false);
+    sessionStorage.setItem("dismiss-admin-prompt", "true"); // don’t show again in same session
+  };
+
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -43,8 +61,32 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
+
+      {/* Admin notfication for visiting admin panel */}
+      {showAdminPrompt && (
+        <div className="fixed top-5 right-5 z-50 bg-white shadow-lg border border-gray-200 rounded-lg p-4 max-w-sm">
+          <p className="text-gray-800 font-medium mb-3">
+            You’re logged in as an admin. Do you want to visit the Admin Panel?
+          </p>
+          <div className="flex justify-end gap-2">
+            <button
+              onClick={handleDismiss}
+              className="px-3 py-1 text-sm rounded-md border border-gray-300 hover:bg-gray-100"
+            >
+              Dismiss
+            </button>
+            <Link
+              href="/admin"
+              className="px-3 py-1 text-sm rounded-md bg-purple-600 text-white hover:bg-purple-700"
+            >
+              Yes
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
-     <section className="relative h-screen flex items-start justify-center pt-24 md:pt-32 overflow-hidden">
+      <section className="relative h-screen flex items-start justify-center pt-24 md:pt-32 overflow-hidden">
 
         <div className="absolute inset-0 z-0">
           <Image
@@ -96,7 +138,7 @@ export default function HomePage() {
           </svg>
         </motion.div>
       </section>
-      
+
       {/* Featured Products */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <motion.div
