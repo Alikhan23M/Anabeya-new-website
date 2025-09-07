@@ -226,10 +226,10 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex items-center space-x-4 py-2">
-                <Link href="/auth/signin" className="text-neutral-700">
+                <Link href="/auth/login" className="text-neutral-700">
                   Sign In
                 </Link>
-                <Link href="/auth/signup" className="bg-primary-600 text-white px-4 py-2 rounded-full">
+                <Link href="/auth/register" className="bg-primary-600 text-white px-4 py-2 rounded-full">
                   Sign Up
                 </Link>
               </div>

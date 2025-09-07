@@ -59,7 +59,7 @@ export default function BottomNav() {
     },
     {
       name: 'Profile',
-      href: session ? '/profile' : '/auth/signin',
+      href: session ? '/profile' : '/auth/login',
       icon: UserIcon,
       iconSolid: UserIconSolid,
     },
