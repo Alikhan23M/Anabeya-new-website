@@ -2,7 +2,7 @@
 import { getServerSession } from 'next-auth/next';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-import { authOptions } from '../auth/[...nextauth]/route';
+import authOptions from '../auth/[...nextauth]/authOptions';
 import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/User';
 import Product from '@/lib/models/Product';

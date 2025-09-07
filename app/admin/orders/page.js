@@ -96,8 +96,8 @@ function OrderRow({ order, onUpdateStatus }) {
       className="card card-hover"
     >
       {/* Order Header */}
-      <div className="p-6 border-b border-neutral-100">
-        <div className="flex items-center justify-between">
+      <div className="p-6 md:p-6 border-b border-neutral-100">
+        <div className="flex items-center justify-between flex-wrap space-y-4 md:space-y-0">
           <div className="flex items-center space-x-4">
             <div className="gradient-primary p-3 rounded-lg">
               <ShoppingBagIcon className="w-6 h-6 text-white" />
@@ -297,7 +297,7 @@ export default function AdminOrdersPage() {
   }
 
   return (
-    <div className="admin-page p-6">
+    <div className="admin-page p-2 md:p-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="admin-header">Orders Management</h1>
@@ -351,11 +351,11 @@ export default function AdminOrdersPage() {
               />
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-wrap">
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             >
               <option value="all">All Status</option>
               <option value="Pending">Pending</option>
@@ -367,7 +367,7 @@ export default function AdminOrdersPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             >
               <option value="date">Sort by Date</option>
               <option value="amount">Sort by Amount</option>
@@ -395,7 +395,7 @@ export default function AdminOrdersPage() {
           </p>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-6 overflow-x-auto">
           {filteredOrders.map((order) => (
             <OrderRow
               key={order._id}

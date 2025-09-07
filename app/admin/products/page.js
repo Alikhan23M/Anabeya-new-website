@@ -565,7 +565,7 @@ export default function AdminProductsPage() {
 
   return (
     <div className="admin-page">
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-2 md:p-6">
         {/* Header */}
         <div className="mb-8">
           <h1 className="admin-header">Products Management</h1>
