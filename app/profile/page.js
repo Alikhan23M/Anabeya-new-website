@@ -68,7 +68,7 @@ export default function ProfilePage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h2>
           <p className="text-gray-600 mb-6">You must be logged in to view your profile.</p>
           <Link
-            href="/auth/signin"
+            href="/auth/login"
             className="bg-gradient-to-r from-purple-600 to-rose-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-rose-700 transition-all duration-200"
           >
             Sign In

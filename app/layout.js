@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "./provider.js";
 import LayoutComponent from "@/components/LayoutComponent";
+import InstallPrompt from "../components/InstallPrompt.js";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -27,7 +28,10 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <Providers>
-          <LayoutComponent>{children}</LayoutComponent>
+          <LayoutComponent>
+            {children}
+          <InstallPrompt/>
+          </LayoutComponent>
         </Providers>
       </body>
     </html>
