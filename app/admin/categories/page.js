@@ -170,18 +170,18 @@ function CategoryForm({ onSave, onCancel, initial }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3 justify-end pt-6 border-t border-neutral-200">
+        <div className="flex flex-wrap w-full gap-3 justify-center md:justify-end pt-6 border-t border-neutral-200">
           <button
             type="button"
             onClick={onCancel}
-            className="btn-outline"
+            className="btn-outline w-full md:w-auto"
             disabled={loading}
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="btn-primary"
+            className="btn-primary w-full md:w-auto flex items-center justify-center gap-2"
             disabled={loading}
           >
             {loading ? (
@@ -316,7 +316,7 @@ export default function AdminCategoriesPage() {
 
   return (
     <div className="admin-page">
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-2 md:p-6">
         {/* Header */}
         <div className="mb-8">
           <h1 className="admin-header">Categories Management</h1>
