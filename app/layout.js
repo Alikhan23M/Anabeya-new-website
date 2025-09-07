@@ -13,13 +13,16 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  
+  const isAdmin = typeof window !== "undefined" && window.location.pathname.startsWith("/admin");
   return (
     <html lang="en">
        <head>
         {/* PWA manifest + theme color */}
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#e4b68a" />
+        <link
+          rel="manifest"
+          href={isAdmin ? "/admin-manifest.json" : "/manifest.json"}
+        />
+        <meta name="theme-color" content="#800080" />
 
         {/* iOS support */}
         <link rel="apple-touch-icon" href="/images/anabeya.jpg" />
