@@ -31,7 +31,7 @@ export default function InstallPrompt() {
   return (
     <>
       {showPrompt && (
-        <div className="fixed top-4  bg-[#0d0d0d] text-white p-4 rounded-lg shadow-lg z-50">
+        <div className="fixed top-4 m-4 md:m-0 md:right-5 bg-[#0d0d0d] text-white p-4 rounded-lg shadow-lg z-50">
           <p className="mb-2">✨ Install Anabeya Collection for a better experience!</p>
           <button
             onClick={handleInstallClick}
