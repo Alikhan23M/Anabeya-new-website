@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRightIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import ProductGrid from '@/components/ProductGrid';
+import { useSession } from 'next-auth/react';
 
 export default function HomePage() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -13,24 +14,29 @@ export default function HomePage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [showAdminPrompt, setShowAdminPrompt] = useState(false);
-  useEffect(() => {
-    fetchData();
 
-    const user = localStorage.getItem("user");
-   const isAdmin = user && JSON.parse(user).role === "admin";
-    const dismissed = sessionStorage.getItem("dismiss-admin-prompt"); // so it shows once per session
-    console.log("isAdmin:", isAdmin, "dismissed:", dismissed);
-    if (isAdmin && !window.location.pathname.startsWith("/admin") && !dismissed) {
-      setShowAdminPrompt(true);
-    }
-    
-  }, []);
+  // const { data: session } = useSession();
+  // const [showPrompt, setShowPrompt] = useState(false);
 
-   const handleDismiss = () => {
-    setShowAdminPrompt(false);
-    sessionStorage.setItem("dismiss-admin-prompt", "true"); // don’t show again in same session
-  };
+  //  useEffect(() => {
+  //   if (!session) return; // not logged in yet
+
+  //   // Check if this user is admin
+  //   const isAdmin = session?.user?.isAdmin || false;
+  //   console.log("Is Admin:", isAdmin);
+  //   console.log("Session:", session);
+  //   // Check if dismissed in this tab
+  //   const dismissed = sessionStorage.getItem("dismiss-admin-prompt");
+
+  //   if (isAdmin && !dismissed) {
+  //     setShowPrompt(true);
+  //   }
+  // }, [session]);
+
+  // const dismissPrompt = () => {
+  //   sessionStorage.setItem("dismiss-admin-prompt", "true");
+  //   setShowPrompt(false);
+  // };
 
 
   useEffect(() => {
@@ -63,29 +69,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-
-      {/* Admin notfication for visiting admin panel */}
-      {showAdminPrompt && (
-        <div className="m-4 fixed top-5  z-50 bg-white shadow-lg border border-gray-200 rounded-lg p-4 max-w-sm">
-          <p className="text-gray-800 font-medium mb-3">
-            You’re logged in as an admin. Do you want to visit the Admin Panel?
-          </p>
-          <div className="flex justify-end gap-2">
-            <button
-              onClick={handleDismiss}
-              className="px-3 py-1 text-sm rounded-md border border-gray-300 hover:bg-gray-100"
-            >
-              Dismiss
-            </button>
-            <Link
-              href="/admin"
-              className="px-3 py-1 text-sm rounded-md bg-purple-600 text-white hover:bg-purple-700"
-            >
-              Yes
-            </Link>
-          </div>
-        </div>
-      )}
+     
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-start justify-center pt-24 md:pt-32 overflow-hidden">

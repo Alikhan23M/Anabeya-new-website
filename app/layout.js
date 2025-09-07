@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Providers from "./provider.js";
 import LayoutComponent from "@/components/LayoutComponent";
 import InstallPrompt from "../components/InstallPrompt.js";
-
+import AdminNotification from "@/components/AdminNotfication.js";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -32,7 +32,9 @@ export default function RootLayout({ children }) {
           <LayoutComponent>
             {children}
           <InstallPrompt/>
+          <AdminNotification/>
           </LayoutComponent>
+
         </Providers>
       
       </body>
