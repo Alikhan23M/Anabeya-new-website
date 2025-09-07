@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Providers from "./provider.js";
 import LayoutComponent from "@/components/LayoutComponent";
 import InstallPrompt from "../components/InstallPrompt.js";
+import DynamicManifest from "../components/DynamicManifest.js";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,15 +14,12 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const isAdmin = typeof window !== "undefined" && window.location.pathname.startsWith("/admin");
+  
   return (
     <html lang="en">
        <head>
         {/* PWA manifest + theme color */}
-        <link
-          rel="manifest"
-          href={isAdmin ? "/admin-manifest.json" : "/manifest.json"}
-        />
+         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#800080" />
 
         {/* iOS support */}
@@ -36,6 +34,8 @@ export default function RootLayout({ children }) {
           <InstallPrompt/>
           </LayoutComponent>
         </Providers>
+        {/* Dynamically swap manifest depending on route */}
+        <DynamicManifest />
       </body>
     </html>
   );
