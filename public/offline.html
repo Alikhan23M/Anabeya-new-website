@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline | Anabeya Collection</title>
+    <link rel="manifest" href="/manifest.json" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+        color: #f8f8f8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+      }
+      .card {
+        background: #111111;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        padding: 2rem;
+        max-width: 420px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      }
+      h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #e4b68a; /* brand accent */
+      }
+      p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        color: #cccccc;
+      }
+      .btn {
+        background: #e4b68a;
+        color: #0d0d0d;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .btn:hover {
+        background: #f1c797;
+      }
+      .logo {
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="logo">Anabeya Collection</div>
+      <h1>You’re Offline</h1>
+      <p>
+        It seems you’ve lost your internet connection.  
+        Don’t worry — you can still browse cached pages.  
+        Please reconnect to continue shopping.
+      </p>
+      <button class="btn" onclick="window.location.reload()">Retry</button>
+    </div>
+  </body>
+</html>
