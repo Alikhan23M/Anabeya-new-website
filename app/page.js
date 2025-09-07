@@ -17,12 +17,14 @@ export default function HomePage() {
   useEffect(() => {
     fetchData();
 
-    const isAdmin = localStorage.getItem("admin-auth");
+    const user = localStorage.getItem("user");
+   const isAdmin = user && JSON.parse(user).role === "admin";
     const dismissed = sessionStorage.getItem("dismiss-admin-prompt"); // so it shows once per session
-
+    console.log("isAdmin:", isAdmin, "dismissed:", dismissed);
     if (isAdmin && !window.location.pathname.startsWith("/admin") && !dismissed) {
       setShowAdminPrompt(true);
     }
+    
   }, []);
 
    const handleDismiss = () => {
@@ -64,7 +66,7 @@ export default function HomePage() {
 
       {/* Admin notfication for visiting admin panel */}
       {showAdminPrompt && (
-        <div className="fixed top-5 right-5 z-50 bg-white shadow-lg border border-gray-200 rounded-lg p-4 max-w-sm">
+        <div className="m-4 fixed top-5  z-50 bg-white shadow-lg border border-gray-200 rounded-lg p-4 max-w-sm">
           <p className="text-gray-800 font-medium mb-3">
             You’re logged in as an admin. Do you want to visit the Admin Panel?
           </p>
