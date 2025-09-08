@@ -176,11 +176,11 @@ function ProductsContent() {
               </div>
 
               {/* Price Range */}
-              <div>
+              <div clas>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Price Range
                 </label>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <input
                     type="number"
                     value={filters.minPrice}
