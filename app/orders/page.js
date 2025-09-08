@@ -85,7 +85,7 @@ function OrderCard({ order, onViewDetails }) {
       {/* Order Header */}
       <div className="p-6 border-b border-neutral-100">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-wrap gap-2 items-center space-x-4">
             <div className="gradient-primary p-3 rounded-lg">
               <ShoppingBagIcon className="w-6 h-6 text-white" />
             </div>
